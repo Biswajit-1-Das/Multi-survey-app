@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+  <link rel="stylesheet" href="{{ url_for('static', filename='stt.css') }}">
+  <title>DTET Survey Form</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f8f9fa; }
+    h2, h3 { color: #003366; }
+    form { background-color: white; padding: 25px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    label { display: block; margin-top: 15px; font-weight: bold; }
+    input[type="text"], input[type="number"], input[type="tel"], input[type="date"], input[type="time"],
+    select, textarea {
+      width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px;
+    }
+    textarea { resize: vertical; }
+    .section { margin-top: 30px; }
+    .submit-btn {
+      margin-top: 20px; background-color: #007bff; color: white; padding: 10px 20px;
+      border: none; border-radius: 5px; cursor: pointer;
+    }
+    .submit-btn:hover { background-color: #0056b3; }
+  </style>
+</head>
+<body class="p-4 flex items-center justify-center min-h-screen">
+
+<div class="container mx-auto p-4 md:p-8 bg-white rounded-lg shadow-xl max-w-2xl w-full">
+  <div class="form-card">
+    <h1 class="text-3xl font-extrabold text-gray-800 mb-6 text-center">📋 DTET Survey Form / ডিটিইটি সমীক্ষা ফর্ম</h1>
+    <form action="/submit" method="post" class="space-y-6">
+
+      <!-- Section A -->
+      <h2 class="text-xl font-bold text-gray-700 border-b-2 pb-2 mb-4">A. Details of the Trainees / প্রশিক্ষণপ্রাপ্তদের বিশদ তথ্য</h2>
+      <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" type="text" name="trainee_id" placeholder="Trainee ID/ Regd. No / রেজিস্ট্রেশন নম্বর *" required>
+      <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" type="text" name="name" placeholder="Name / নাম *" required>
+      <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" type="number" name="age" placeholder="Age / বয়স *" required>
+      <select class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="gender" required>
+        <option value="">Gender / লিঙ্গ *</option>
+        <option value="Male">Male / পুরুষ</option>
+        <option value="Female">Female / মহিলা</option>
+        <option value="Other">Other / অন্যান্য</option>
+      </select>
+      <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" type="tel" name="contact" placeholder="Contact Number / যোগাযোগের নম্বর *" required>
+      <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" type="text" name="district" placeholder="District / জেলা *" required>
+      <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" type="text" name="college_name" placeholder="Name of Polytechnic College / পলিটেকনিকের নাম *" required>
+      <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" type="text" name="course" placeholder="Name of the course undertaken / কোর্সের বিভাগ *" required>
+
+      <!-- Section B -->
+      <h2 class="text-xl font-bold text-gray-700 border-b-2 pb-2 mb-4 mt-8">B. Impact of Utkarsh Bangla Project / উৎকর্ষ বাংলা প্রকল্পের প্রভাব</h2>
+      <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" type="text" name="overall_experience" placeholder="1. Overall experience of education/training / সামগ্রিক অভিজ্ঞতা:">
+      <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" type="number" name="class_regular" placeholder="9a. Class Regularity (0-10) / ক্লাসের নিয়মিততা (০-১০)" min="0" max="10">
+      <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" type="number" name="practical_quality" placeholder="9b. Quality of practical & OJT classes (0-10) / ব্যবহারিক ও ওজেটি ক্লাসের গুণমান (০-১০)" min="0" max="10">
+      <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" type="number" name="tools_adequacy" placeholder="9c. Adequacy of tools & equipment (0-10) / সরঞ্জাম ও যন্ত্রপাতির পর্যাপ্ততা (০-১০)" min="0" max="10">
+      <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" type="number" name="training_experience" placeholder="12d. Overall training experience (0-10) / সামগ্রিক প্রশিক্ষণের অভিজ্ঞতা (০-১০)" min="0" max="10">
+
+      <!-- Section C -->
+      <h2 class="text-xl font-bold text-gray-700 border-b-2 pb-2 mb-4 mt-8">C. Placement Support / নিয়োগ সংক্রান্ত সহায়তা</h2>
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">13. Was placement support provided? / প্লেসমেন্ট সহায়তা প্রদান করা হয়েছিল? *</label>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="placement_support" value="Yes" required>
+            <span class="ml-2 text-gray-700">Yes / হ্যাঁ</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="placement_support" value="No">
+            <span class="ml-2 text-gray-700">No / না</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">14. Received placement offers through institute? / ইনস্টিটিউটের মাধ্যমে প্লেসমেন্ট অফার পেয়েছেন? *</label>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="placement_offer" value="Yes" required>
+            <span class="ml-2 text-gray-700">Yes / হ্যাঁ</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="placement_offer" value="No">
+            <span class="ml-2 text-gray-700">No / না</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">15a. If Yes, did you join? / যদি হ্যাঁ, আপনি কি যোগদান করেছিলেন? *</label>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="placement_joined" value="Yes" required>
+            <span class="ml-2 text-gray-700">Yes / হ্যাঁ</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="placement_joined" value="No">
+            <span class="ml-2 text-gray-700">No / না</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">16b. Duration worked: / কাজের সময়কাল: *</label>
+        <select class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="placement_duration" required>
+          <option value="">Select / নির্বাচন করুন</option>
+          <option value="0-3">0 to &lt; 3 months / ০ থেকে &lt; ৩ মাস</option>
+          <option value="3-6">3 to 6 months / ৩ থেকে ৬ মাস</option>
+          <option value="6-12">6 to &lt; 12 months / ৬ থেকে &lt; ১২ মাস</option>
+          <option value="12+">≥ 12 months / ≥ ১২ মাস</option>
+        </select>
+      </div>
+
+      <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" type="text" name="placement_no_reason" placeholder="17c. If No, then why? / যদি না হয়, তাহলে কেন?">
+
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">18d. Was a pre-placement talk organized? / একটি প্রাক-প্লেসমেন্ট আলোচনা আয়োজন করা হয়েছিল? *</label>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="pre_placement_talk" value="Yes" required>
+            <span class="ml-2 text-gray-700">Yes / হ্যাঁ</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="pre_placement_talk" value="No">
+            <span class="ml-2 text-gray-700">No / না</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">19e. Was language a barrier? / ভাষা কি একটি বাধা ছিল? *</label>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="language_barrier" value="Yes" required>
+            <span class="ml-2 text-gray-700">Yes / হ্যাঁ</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="language_barrier" value="No">
+            <span class="ml-2 text-gray-700">No / না</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">20f. Need for physical career counselling? / শারীরিক কর্মজীবনের কাউন্সেলিংয়ের প্রয়োজন? *</label>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="career_counselling" value="Yes" required>
+            <span class="ml-2 text-gray-700">Yes / হ্যাঁ</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="career_counselling" value="No">
+            <span class="ml-2 text-gray-700">No / না</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">21g. Were soft skill sessions helpful? / সফট স্কিল সেশনগুলি কি সহায়ক ছিল? *</label>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="soft_skills" value="Yes" required>
+            <span class="ml-2 text-gray-700">Yes / হ্যাঁ</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="soft_skills" value="No">
+            <span class="ml-2 text-gray-700">No / না</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">22h. Aware of Rojgar Seva Portal? / রোজগার সেবা পোর্টাল সম্পর্কে সচেতন? *</label>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="rojgar_awareness" value="Yes" required>
+            <span class="ml-2 text-gray-700">Yes / হ্যাঁ</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="rojgar_awareness" value="No">
+            <span class="ml-2 text-gray-700">No / না</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Section D -->
+      <h2 class="text-xl font-bold text-gray-700 border-b-2 pb-2 mb-4 mt-8">D. Employment Details / চাকরি সংক্রান্ত বিষয়ক</h2>
+
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">23. Current Employment Status / বর্তমান কর্মসংস্থান অবস্থা *</label>
+        <select class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="employment_status" required>
+          <option value="">Select / নির্বাচন করুন</option>
+          <option value="Wage Employed">Wage Employed / বেতনভিত্তিক কাজে নিযুক্ত</option>
+          <option value="Self Employed">Self Employed / স্ব-নিযুক্তি কাজে নিযুক্ত</option>
+          <option value="Unemployed">Unemployed / নিযুক্ত নয়</option>
+        </select>
+      </div>
+
+      <!-- Wage Employed -->
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">24a. How did you receive the job? / আপনি কিভাবে কাজটি পেয়েছেন?</label>
+        <select class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="job_source">
+          <option value="">Select / নির্বাচন করুন</option>
+          <option>Job Fair / কর্ম মেলা</option>
+          <option>Campus Placement / ক্যাম্পাস প্লেসমেন্ট</option>
+          <option>Self Arranged / স্ব-ব্যবস্থাপনা</option>
+          <option>Rojgar Seva Portal / রোজগার সেবা পোর্টাল</option>
+          <option>Others / অন্যান্য</option>
+        </select>
+      </div>
+
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">25b. Monthly income bracket: / মাসিক আয়ের পরিসর:</label>
+        <select class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="wage_income">
+          <option value="">Select / নির্বাচন করুন</option>
+          <option>0-5000</option>
+          <option>5000-8000</option>
+          <option>8000-10000</option>
+          <option>10000-13000</option>
+          <option>13000-16000</option>
+          <option>16000 and above</option>
+        </select>
+      </div>
+
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">26c. Migrated to another state? / অন্য রাজ্যে স্থানান্তরিত হয়েছেন? *</label>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="migrate_state" value="Yes" required>
+            <span class="ml-2 text-gray-700">Yes / হ্যাঁ</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="migrate_state" value="No">
+            <span class="ml-2 text-gray-700">No / না</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">27d. Migrated to another district? / অন্য জেলায় স্থানান্তরিত হয়েছেন? *</label>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="migrate_district" value="Yes" required>
+            <span class="ml-2 text-gray-700">Yes / হ্যাঁ</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="migrate_district" value="No">
+            <span class="ml-2 text-gray-700">No / না</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">28e. Working in trained job role? / প্রশিক্ষিত কাজের ভূমিকায় কাজ করছেন? *</label>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="job_role_match" value="Yes" required>
+            <span class="ml-2 text-gray-700">Yes / হ্যাঁ</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="job_role_match" value="No">
+            <span class="ml-2 text-gray-700">No / না</span>
+          </label>
+        </div>
+      </div>
+
+      <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" type="text" name="current_trade" placeholder="29f. If No, mention current trade: / যদি না হয়, বর্তমান ব্যবসা উল্লেখ করুন:">
+
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">30g. Offered better job due to training? / প্রশিক্ষণের কারণে আরও ভালো চাকরির প্রস্তাব পেয়েছেন? *</label>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="vertical_mobility" value="Yes" required>
+            <span class="ml-2 text-gray-700">Yes / হ্যাঁ</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="vertical_mobility" value="No">
+            <span class="ml-2 text-gray-700">No / না</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">31h. Looking for international placement? / আন্তর্জাতিক প্লেসমেন্টের জন্য খুঁজছেন? *</label>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="international_job" value="Yes" required>
+            <span class="ml-2 text-gray-700">Yes / হ্যাঁ</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="international_job" value="No">
+            <span class="ml-2 text-gray-700">No / না</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Self Employed -->
+      <h3 class="text-lg font-semibold text-gray-600 mt-6 mb-4">Self Employed / স্ব-নিযুক্তি</h3>
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">32a. Monthly income (Self Employed) / মাসিক আয় (স্ব-নিযুক্তি)</label>
+        <select class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="self_income">
+          <option value="">Select / নির্বাচন করুন</option>
+          <option>0-5000</option>
+          <option>5000-8000</option>
+          <option>8000-10000</option>
+          <option>10000-13000</option>
+          <option>13000-16000</option>
+          <option>16000 and above</option>
+        </select>
+      </div>
+
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">33b. Working in trained job role? / প্রশিক্ষিত কাজের ভূমিকায় কাজ করছেন? *</label>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="self_job_match" value="Yes" required>
+            <span class="ml-2 text-gray-700">Yes / হ্যাঁ</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="self_job_match" value="No">
+            <span class="ml-2 text-gray-700">No / না</span>
+          </label>
+        </div>
+      </div>
+
+      <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" type="text" name="self_current_trade" placeholder="34. If No, current trade: / যদি না হয়, বর্তমান ব্যবসা:">
+
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">35c. Received CC linkage / loan? / সিসি লিংকেজ / ঋণ পেয়েছেন? *</label>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="cc_loan" value="Yes" required>
+            <span class="ml-2 text-gray-700">Yes / হ্যাঁ</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="cc_loan" value="No">
+            <span class="ml-2 text-gray-700">No / না</span>
+          </label>
+        </div>
+      </div>
+
+      <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" type="text" name="scheme_name" placeholder="36. Scheme name (if yes): / প্রকল্পের নাম (যদি হ্যাঁ হয়):">
+
+      <!-- Unemployed -->
+      <h3 class="text-lg font-semibold text-gray-600 mt-6 mb-4">Unemployed / বেকার</h3>
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">37a. If not employed, what are you doing? / যদি নিযুক্ত না হন, আপনি কি করছেন?</label>
+        <select class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="unemployed_status">
+          <option value="">Select / নির্বাচন করুন</option>
+          <option>Looking for job / চাকরির খোঁজ করছি</option>
+          <option>Higher education / উচ্চ শিক্ষা</option>
+          <option>Govt exam prep / সরকারি পরীক্ষার প্রস্তুতি</option>
+          <option>Not looking / খুঁজছি না</option>
+          <option>Thinking of starting business / ব্যবসা শুরু করার কথা ভাবছি</option>
+          <option>Others / অন্যান্য</option>
+        </select>
+      </div>
+
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">38a. Willing to move within WB? / পশ্চিমবঙ্গের মধ্যে স্থানান্তরিত হতে ইচ্ছুক? *</label>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="move_wb" value="Yes" required>
+            <span class="ml-2 text-gray-700">Yes / হ্যাঁ</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="move_wb" value="No">
+            <span class="ml-2 text-gray-700">No / না</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">39b. Willing to move outside WB? / পশ্চিমবঙ্গের বাইরে স্থানান্তরিত হতে ইচ্ছুক? *</label>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="move_outside_wb" value="Yes" required>
+            <span class="ml-2 text-gray-700">Yes / হ্যাঁ</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="move_outside_wb" value="No">
+            <span class="ml-2 text-gray-700">No / না</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Section E -->
+      <h2 class="text-xl font-bold text-gray-700 border-b-2 pb-2 mb-4 mt-8">E. Feedback & Surveyor Details / প্রতিক্রিয়া ও তথ্য সংগ্রাহক</h2>
+
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">40. Learned new skills? / নতুন দক্ষতা শিখেছেন? *</label>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="learned_skills" value="Yes" required>
+            <span class="ml-2 text-gray-700">Yes / হ্যাঁ</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="learned_skills" value="No">
+            <span class="ml-2 text-gray-700">No / না</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">41. Recommend course to others? / কোর্সটি অন্যদের সুপারিশ করবেন? *</label>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="recommend_course" value="Yes" required>
+            <span class="ml-2 text-gray-700">Yes / হ্যাঁ</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="recommend_course" value="No">
+            <span class="ml-2 text-gray-700">No / না</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">42. Completed course on/after 2022? / ২০২২ সালের পর কোর্স সম্পন্ন করেছেন? *</label>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="course_2022" value="Yes" required>
+            <span class="ml-2 text-gray-700">Yes / হ্যাঁ</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="course_2022" value="No">
+            <span class="ml-2 text-gray-700">No / না</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">43a. Teaching aids & visibility okay? / শিক্ষণ সহায়ক ও দৃশ্যমানতা ঠিক আছে? *</label>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="teaching_aids" value="Yes" required>
+            <span class="ml-2 text-gray-700">Yes / হ্যাঁ</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="teaching_aids" value="No">
+            <span class="ml-2 text-gray-700">No / না</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">44b. Study materials provided? / অধ্যয়নের উপকরণ সরবরাহ করা হয়েছিল? *</label>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="study_material" value="Yes" required>
+            <span class="ml-2 text-gray-700">Yes / হ্যাঁ</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="study_material" value="No">
+            <span class="ml-2 text-gray-700">No / না</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question-group border p-4 rounded-md shadow-sm">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">45c. Teachers supportive in difficulties? / শিক্ষকরা কি সমস্যায় সহায়ক ছিলেন? *</label>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="teacher_support" value="Yes" required>
+            <span class="ml-2 text-gray-700">Yes / হ্যাঁ</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio text-blue-600" name="teacher_support" value="No">
+            <span class="ml-2 text-gray-700">No / না</span>
+          </label>
+        </div>
+      </div>
+
+      <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" type="text" name="surveyor_name" placeholder="46. Surveyor Name / তথ্য সংগ্রহকারীর নাম *" required>
+      <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" type="text" name="designation" placeholder="47. Designation / পদ *" required>
+      <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" type="date" name="call_date" placeholder="48. Date of Phone Call / ফোন করার তারিখ *" required>
+      <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" type="time" name="call_time" placeholder="49. Time of Phone Call / ফোন করার সময় *" required>
+      <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" type="text" name="call_duration" placeholder="50. Duration of Phone Call / ফোন কলের সময়কাল *" required>
+
+      <button class="w-full bg-blue-600 text-white font-bold p-3 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out shadow-lg transform hover:scale-105" type="submit">Submit / জমা দিন</button>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

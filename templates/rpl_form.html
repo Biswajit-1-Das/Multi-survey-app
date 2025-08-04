@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="{{ url_for('static', filename='rpl.css') }}">
+  <title>DTET Survey Form</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f8f9fa; }
+    h2, h3 { color: #003366; }
+    form { background-color: white; padding: 25px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    label { display: block; margin-top: 15px; font-weight: bold; }
+    input[type="text"], input[type="number"], input[type="tel"], input[type="date"], input[type="time"],
+    select, textarea {
+      width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px;
+    }
+    textarea { resize: vertical; }
+    .section { margin-top: 30px; }
+    .submit-btn {
+      margin-top: 20px; background-color: #007bff; color: white; padding: 10px 20px;
+      border: none; border-radius: 5px; cursor: pointer;
+    }
+    .submit-btn:hover { background-color: #0056b3; }
+  </style>
+</head>
+<body class="p-4 flex items-center justify-center min-h-screen">
+  <div class="container mx-auto p-4 md:p-8 bg-white rounded-lg shadow-xl max-w-2xl w-full">
+    <div class="form-card">
+      <h1 class="text-3xl font-extrabold text-gray-800 mb-6 text-center">🧾 Recognition of Prior Learning (RPL) – Trainee Survey / স্বীকৃতিমূলক পূর্ব-শিক্ষণ (RPL) – প্রশিক্ষণার্থী সমীক্ষা</h1>
+      <form action="/submit/rpl" method="POST" class="space-y-6">
+
+        <!-- Details of the Trainees -->
+        <h2 class="text-xl font-bold text-gray-700 border-b-2 pb-2 mb-4">Details of the Trainees: / প্রশিক্ষণপ্রাপ্তদের বিশদ তথ্য:</h2>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Trainee ID" placeholder="Trainee ID: *" required>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Name" placeholder="Name: *" required>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Age" type="number" placeholder="Age: *" required min="16">
+
+        <select class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Gender" required>
+          <option value="">Gender:/লিঙ্গ: *</option>
+          <option value="Male">Male/পুরুষ</option>
+          <option value="Female">Female/মহিলা</option>
+          <option value="Other">Other/অন্যান্য</option>
+        </select>
+
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Caste" placeholder="Caste:/জাতি: (e.g., SC, ST, OBC, General)" required>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Contact Number" type="tel" placeholder="Contact Number:/যোগাযোগের নম্বর: *" required>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="District" placeholder="District:/জেলা: *" required>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Training Provider" placeholder="Name of UB Training Provider:/উৎকর্ষ বাংলা ট্রেনিং প্রদানকারী সংস্থার নাম: *" required>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Course Name" placeholder="Name of the course undertaken:/কোর্সের নাম: *" required>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Course Code" placeholder="Course Code/কোর্সের কোড নম্বর *" required>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Course Duration (months)" type="number" placeholder="Course duration in months / কোর্সের সময়কাল (মাসে) *" required min="1">
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">Were you earning before pursuing the training course that used to bring you income? /আপনি কি এই ট্রেনিং কোর্সে ভর্তি হবার আগে আয়-উপার্জন করতেন? *</label>
+          <div class="flex items-center space-x-4">
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Earning Before Course" value="Yes" required>
+              <span class="ml-2 text-gray-700">Yes/হ্যাঁ</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Earning Before Course" value="No">
+              <span class="ml-2 text-gray-700">No/না</span>
+            </label>
+          </div>
+        </div>
+
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Previous Monthly Income" type="number" placeholder="If Yes, previous monthly income (In Rs.)?/আগের প্রশ্নের উত্তর যদি হ্যাঁ হয় তবে, মাসিক কতো টাকা রোজগার হতো? *" min="0">
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">Are you currently / আপনি কি বর্তমানে *</label>
+          <div class="flex flex-col space-y-2">
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Current Employment Status" value="Wage Employed" required>
+              <span class="ml-2 text-gray-700">Wage Employed? / বেতনভিত্তিক কাজে নিযুক্ত?</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Current Employment Status" value="Self Employed">
+              <span class="ml-2 text-gray-700">Self Employed?/ স্ব - নিযুক্তি কাজে নিযুক্ত ?</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Current Employment Status" value="Unemployed">
+              <span class="ml-2 text-gray-700">Unemployed?/ নিযুক্ত নয় ?</span>
+            </label>
+          </div>
+        </div>
+
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Current Monthly Income" type="number" placeholder="After pursuing the RPL course what is your current monthly income (In Rs.)?/ RPL কোর্স করার পরে আপনার বর্তমানে মাসিক আয় কত (টাকায়)? *" min="0" required>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">How did you hear about the RPL? / স্বল্প মেয়াদি এই কোর্স সম্পর্কে আপনি কিভাবে জানতে পারলেন ? *</label>
+          <div class="checkbox-group flex-col space-y-2">
+            <label class="inline-flex items-center">
+              <input type="checkbox" class="form-checkbox text-blue-600 rounded" name="Heard From" value="Social Media">
+              <span class="ml-2 text-gray-700">Social Media/ সমাজ মাধ্যম</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="checkbox" class="form-checkbox text-blue-600 rounded" name="Heard From" value="Govt. Banners">
+              <span class="ml-2 text-gray-700">Govt. Banners/ সরকারি ব্যানার</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="checkbox" class="form-checkbox text-blue-600 rounded" name="Heard From" value="Friends/Relatives">
+              <span class="ml-2 text-gray-700">Friends/ Relatives/ বন্ধু বা আত্মীয়</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="checkbox" class="form-checkbox text-blue-600 rounded" name="Heard From" value="TP">
+              <span class="ml-2 text-gray-700">TP র মাধ্যমে</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="checkbox" class="form-checkbox text-blue-600 rounded" name="Heard From" value="Employer">
+              <span class="ml-2 text-gray-700">যে প্রতিষ্ঠানে কাজ করি তাদের মাধ্যমে</span>
+            </label>
+          </div>
+        </div>
+
+        <input type="number" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Training Usefulness" placeholder="Did you find the training useful for employment? On a scale of 0 to 10 (0-10) / আপনি কি এই প্রশিক্ষণকে চাকরী পাবার বা উপার্জনমূলক কাজ করার ক্ষেত্রে উপযোগী বলে মনে করেন ? ০-১০ র একটি স্কেল এর মধ্যে নির্ধারণ করুন *" min="0" max="10" required>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">Have you received any CC (Cash-credit) Linkage Or Bank Loan after the completion of training?/আপনি কি প্রশিক্ষণ পাবার পরে ক্যাশ-ক্রেডিট লিংকেজ অথবা ব্যাঙ্ক ঋণ পেয়েছেন? *</label>
+          <div class="flex items-center space-x-4">
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Credit Linkage" value="Yes" required>
+              <span class="ml-2 text-gray-700">Yes/হ্যাঁ</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Credit Linkage" value="No">
+              <span class="ml-2 text-gray-700">No/না</span>
+            </label>
+          </div>
+        </div>
+
+       <div class="question-group border p-4 rounded-md shadow-sm">
+         <label class="block text-gray-700 text-sm font-semibold mb-2">If yes, select type:/যদি হ্যাঁ হয়, ধরন নির্বাচন করুন:</label>
+         <div class="checkbox-group flex-col space-y-2">
+           <label class="inline-flex items-center">
+             <input type="checkbox" class="form-checkbox text-blue-600 rounded" name="credit_type[]" value="Bhabisyat">
+             <span class="ml-2 text-gray-700">Bhabisyat credit card /ভবিষ্যৎ ক্রেডিট কার্ড</span>
+           </label>
+           <label class="inline-flex items-center">
+             <input type="checkbox" class="form-checkbox text-blue-600 rounded" name="credit_type[]" value="SHG">
+             <span class="ml-2 text-gray-700">SHG bank credit linkage / স্ব - নির্ভর গোষ্ঠী ব্যাঙ্ক ক্রেডিট লিংকেজ</span>
+           </label>
+           <label class="inline-flex items-center">
+             <input type="checkbox" class="form-checkbox text-blue-600 rounded" name="credit_type[]" value="MUDRA">
+             <span class="ml-2 text-gray-700">MUDRA লোন / মুদ্রা লোন</span>
+           </label>
+           <label class="inline-flex items-center">
+             <input type="checkbox" class="form-checkbox text-blue-600 rounded" name="credit_type[]" value="Personal">
+             <span class="ml-2 text-gray-700">Personal Loan/ ব্যক্তিগত ঋণ</span>
+           </label>
+         </div>
+       </div>
+
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">Have you been offered a higher/better position in your job courtesy of your vocational education /training? (to assess the vertical mobility)/ আপনাকে কি আপনার পঠিত কোর্সের ওপর ভিত্তি করে পদোন্নতি দেওয়া হয়েছে ? *</label>
+          <div class="flex items-center space-x-4">
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Promotion" value="Yes" required>
+              <span class="ml-2 text-gray-700">a.Yes/হ্যাঁ</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Promotion" value="No">
+              <span class="ml-2 text-gray-700">b.No/না</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- B. Recommendation -->
+        <h2 class="text-xl font-bold text-gray-700 border-b-2 pb-2 mb-4 mt-8">B. Recommendation / সুপারিশ</h2>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">Would you recommend such a training program to others?/ আপনি কি উৎকর্ষ বাংলা কোর্স অন্যান্যদের সুপারিশ করবেন ? *</label>
+          <div class="flex items-center space-x-4">
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Recommend to Others" value="Yes" required>
+              <span class="ml-2 text-gray-700">a.Yes/হ্যাঁ</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Recommend to Others" value="No">
+              <span class="ml-2 text-gray-700">b.No/না</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- C. Details of the surveyor and other important details to be captured -->
+        <h2 class="text-xl font-bold text-gray-700 border-b-2 pb-2 mb-4 mt-8">C. Details of the surveyor and other important details to be captured/ তথ্য সংগ্রহকারীর বিবরণ ও অন্যান্য গুরুত্বপূর্ন তথ্য</h2>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Surveyor Name" placeholder="Name of Surveyor/তথ্য সংগ্রহকারীর নাম *" required>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Surveyor Designation" placeholder="Designation/পদ *" required>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Surveyor District" placeholder="District/জেলা *" required>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Survey Date" type="date" placeholder="Date of phone call or visit/ফোন করার তারিখ বা দেখা করে তথ্য সংগ্রহের তারিখ *" required>
+
+        <button type="submit" class="w-full bg-blue-600 text-white font-bold p-3 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out shadow-lg transform hover:scale-105">
+          ✅ Submit RPL Survey / RPL সমীক্ষা জমা দিন
+        </button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

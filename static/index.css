@@ -1,0 +1,65 @@
+/* Reset & Font */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(to right, #eef2f3, #cfd9df);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+}
+
+/* Main container with centered card */
+.main-container {
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+}
+
+/* Card UI */
+.card {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h1 {
+  font-size: 1.8rem;
+  color: #004080;
+  margin-bottom: 10px;
+}
+.card p {
+  font-size: 1rem;
+  margin-bottom: 25px;
+}
+
+/* Button group */
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.survey-btn {
+  display: block;
+  padding: 12px 20px;
+  text-decoration: none;
+  background: #007BFF;
+  color: white;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background 0.2s ease-in-out;
+}
+.survey-btn:hover {
+  background: #0056b3;
+}

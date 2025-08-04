@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vocational.css') }}">
+  <title>DTET Survey Form</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f8f9fa; }
+    h2, h3 { color: #003366; }
+    form { background-color: white; padding: 25px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    label { display: block; margin-top: 15px; font-weight: bold; }
+    input[type="text"], input[type="number"], input[type="tel"], input[type="date"], input[type="time"],
+    select, textarea {
+      width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px;
+    }
+    textarea { resize: vertical; }
+    .section { margin-top: 30px; }
+    .submit-btn {
+      margin-top: 20px; background-color: #007bff; color: white; padding: 10px 20px;
+      border: none; border-radius: 5px; cursor: pointer;
+    }
+    .submit-btn:hover { background-color: #0056b3; }
+  </style>
+</head>
+<body class="p-4 flex items-center justify-center min-h-screen">
+  <div class="container mx-auto p-4 md:p-8 bg-white rounded-lg shadow-xl max-w-2xl w-full">
+    <div class="form-card">
+      <h1 class="text-3xl font-extrabold text-gray-800 mb-6 text-center">🔧 Vocational Training – Trainee Survey / বৃত্তিমূলক প্রশিক্ষণ – প্রশিক্ষণার্থী সমীক্ষা</h1>
+      <form action="/submit/vocational" method="POST" class="space-y-6">
+
+        <!-- A. Details of the Trainees -->
+        <h2 class="text-xl font-bold text-gray-700 border-b-2 pb-2 mb-4">A. Details of the Trainees/প্রশিক্ষণপ্রাপ্তদের বিশদ তথ্য:</h2>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Registration_No" placeholder="1. Registration no. of WBSCTVE&SD/WBSCTVE&SD এর রেজিস্ট্রেশন নম্বর *" required>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Student_Name" placeholder="2. Name of the student / Trainee ছাত্র-ছাত্রী/ প্রশিক্ষণপ্রাপ্তর নাম : *" required>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Age" type="number" placeholder="3. Age/বয়স *" required>
+
+        <select class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Gender" required>
+          <option value="">4. Gender/লিঙ্গ *</option>
+          <option value="Male">Male/পুরুষ</option>
+          <option value="Female">Female/মহিলা</option>
+          <option value="Others">Others/অন্যান্য</option>
+        </select>
+
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Contact_Number" type="tel" placeholder="5. Contact Number/যোগাযোগের নম্বর। দূরভাষ *" required>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="District" placeholder="6. District/জেলা *" required>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="VTC_Name" placeholder="7. Name of the VTC/VTC এর নাম *" required>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="VTC_Code" placeholder="8. VTC Code/VTC কোড *" required>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Course_Undertaken" placeholder="9. Name of the vocational course undertaken/বৃত্তিমূলক কোর্সের নাম *" required>
+
+        <!-- B. Impact of Vocational Education/ Training -->
+        <h2 class="text-xl font-bold text-gray-700 border-b-2 pb-2 mb-4 mt-8">B. Impact of Vocational Education/ Training/বৃত্তিমূলক শিক্ষা / প্রশিক্ষণের প্রভাব :</h2>
+        <p class="text-gray-600 mb-4">Overall experience of the education/training/ কোর্স পঠনের সামগ্রিক অভিজ্ঞতা:</p>
+
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" type="number" name="Overall_Experience_Score" placeholder="10.a) How was your overall education/ training experience (0-10)?/কোর্স সম্পর্কে আপনার সামগ্রিক অভিজ্ঞতা কেমন ছিল (০-১০)? *" min="0" max="10" required>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" type="number" name="Class_Regularity_Score" placeholder="11.b) How regular were your classes (0-10)?/আপনার ক্লাস কি নিয়মিত হতো (০-১০)? *" min="0" max="10" required>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" type="number" name="Theory_Practical_Time_Adequacy_Score" placeholder="12.c) How adequate was the time provided for theory and practical lessons (0-10)?/থিওরি, প্রাকটিক্যাল-এর জন্য কি যথেষ্ট সময় দেওয়া হতো (০-১০)? *" min="0" max="10" required>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" type="number" name="Equipment_Tools_Adequacy_Score" placeholder="13.d) How adequate were the equipment & tools available for hands-on training (0-10)?/হাতে কলমে প্রশিক্ষণের জন্য সরঞ্জাম ও টুলস কি যথেষ্ট ছিল (০-১০)? *" min="0" max="10" required>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">14.e) Did you play the "Amar Karmadisha" Game during the course?/রেজিস্ট্রেশনের সময় কি আপনি 'আমার কর্মদিশা' খেলাটি খেলেছিলেন? *</label>
+          <div class="flex items-center space-x-4">
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Amar_Karmadisha_Played" value="Yes" required>
+              <span class="ml-2 text-gray-700">Yes/হ্যাঁ</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Amar_Karmadisha_Played" value="No">
+              <span class="ml-2 text-gray-700">No/না</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">15.f) If Yes, how was your overall experience of playing the game and its relevance?/যদি হ্যাঁ হয় তবে খেলাটি খেলার সময় আপনার সামগ্রিক অভিজ্ঞতা কেমন হয়েছিল?</label>
+          <select class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Karmadisha_Experience">
+            <option value="">Select/নির্বাচন করুন</option>
+            <option value="Very good and relevant">Very good and relevant/খুব ভালো ও প্রাসঙ্গিক</option>
+            <option value="Good and relevant">Good and relevant/ভালো ও প্রাসঙ্গিক</option>
+            <option value="Moderate and somewhat relevant">Moderate and somewhat relevant/মধ্যম মানের ও কিছুটা প্রাসঙ্গিক</option>
+            <option value="Poor and irrelevant">Poor and irrelevant/ভালো না ও অপ্রাসঙ্গিক</option>
+          </select>
+        </div>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">16.g) Have you pursued the same course as suggested by "Amar Karmadisha"?"আমার কর্মদিশা' প্রস্তাবিত কোর্সই কি আপনি অনুসরণ করেছেন? *</label>
+          <div class="flex items-center space-x-4">
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Pursued_Karmadisha_Course" value="Yes" required>
+              <span class="ml-2 text-gray-700">Yes/হ্যাঁ</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Pursued_Karmadisha_Course" value="No">
+              <span class="ml-2 text-gray-700">No/না</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">17.h) If No, then why/যদি না হয় তবে কেন *</label>
+          <select class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Not_Pursued_Karmadisha_Reason">
+            <option value="">Select a reason/একটি কারণ নির্বাচন করুন</option>
+            <option value="It was not my intended course">It was not my intended course/এই কোর্সটি আমার চাহিদা অনুযায়ী ছিল না</option>
+            <option value="Course not available in my district">The course was not available in my district/এই কোর্সটি আমার জেলায় উপলব্ধ ছিল না</option>
+            <option value="Others">Others/অন্যান্য কারণ হলে, উল্লেখ করুন</option>
+          </select>
+          <input type="text" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 mt-2" name="Not_Pursued_Karmadisha_Reason_Other" placeholder="Please specify if 'Others'/যদি 'অন্যান্য' হয়, অনুগ্রহ করে উল্লেখ করুন">
+        </div>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">18.i) Are you aware about Rojgar Seva Portal/আপনি কি রোজগার সেবা পোর্টাল সম্পর্কে অবহিত? *</label>
+          <div class="flex items-center space-x-4">
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Rojgar_Seva_Aware" value="Yes" required>
+              <span class="ml-2 text-gray-700">Yes/হ্যাঁ</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Rojgar_Seva_Aware" value="No">
+              <span class="ml-2 text-gray-700">No/না</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- C. Employment Details -->
+        <h2 class="text-xl font-bold text-gray-700 border-b-2 pb-2 mb-4 mt-8">C. Employment Details/নিয়োগ সংক্রান্ত সহায়তা বিষয়ক:</h2>
+        <p class="text-gray-600 mb-4">Kindly provide your employment details in this section.</p>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">19. 2. Was placement support provided to you from VTC/DVET? VTC/DVET থেকে কি নিয়োগ সংক্রান্ত সহায়তা পেয়েছেন? *</label>
+          <div class="flex items-center space-x-4">
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Placement_Support_Provided" value="Yes" required>
+              <span class="ml-2 text-gray-700">Yes/হ্যাঁ</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Placement_Support_Provided" value="No">
+              <span class="ml-2 text-gray-700">No/না</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">20. 3. Have you received any placement offers from VTC/DVET? আপনি কি VTC/DVET-র মাধ্যমে কোনো নিয়োগপত্র পেয়েছিলেন? *</label>
+          <div class="flex items-center space-x-4">
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Placement_Offers_Received" value="Yes" required>
+              <span class="ml-2 text-gray-700">Yes/হ্যাঁ</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Placement_Offers_Received" value="No">
+              <span class="ml-2 text-gray-700">No/না</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">21. a) If Yes, did you join the job/যদি হ্যাঁ হয়, তবে আপনি কি সেই চাকরিতে যোগদান করেছিলেন? *</label>
+          <div class="flex items-center space-x-4">
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Joined_Job" value="Yes" required>
+              <span class="ml-2 text-gray-700">Yes/হ্যাঁ</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Joined_Job" value="No">
+              <span class="ml-2 text-gray-700">No/না</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">22. b) If Yes, then how long did you work there/যদি হ্যাঁ হয় তবে কতোদিন সেই চাকরি করেছিলেন? *</label>
+          <select class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Job_Duration_Joined">
+            <option value="">Select duration/সময়কাল নির্বাচন করুন</option>
+            <option value="0-3 months">0 to 3 months/মাস</option>
+            <option value="3-6 months">3 to 6 months/মাস</option>
+            <option value="6-12 months">6 months to < 12 months/মাস</option>
+            <option value=">12 months">>=12 months/মাস</option>
+          </select>
+        </div>
+
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Not_Joined_Reason" placeholder="23. c) If No, then Why/যদি উত্তর না হয়, তবে কারণ কি? *">
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">24. 4. How did you receive the job/আপনি কি প্রক্রিয়ায় চাকরি পেলেন? *</label>
+          <select class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Job_Receive_Method" required>
+            <option value="">Select method/পদ্ধতি নির্বাচন করুন</option>
+            <option value="Job Fair">Job Fair/কর্ম সংস্থান মেলা</option>
+            <option value="Self arranged">Self arranged/নিজস্ব উদ্যোগে</option>
+            <option value="Rojgar Seva Portal">Rojgar Seva Portal/রোজগার সেবা পোর্টালের মাধ্যমে</option>
+            <option value="Campus Interview">Campus Interview/প্রতিষ্ঠান থেকে আয়োজিত নিয়োগ ব্যবস্থা</option>
+            <option value="Others">Others/অন্য কোনো ভাবে</option>
+          </select>
+        </div>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">25. 5. Are you currently/আপনি কি বর্তমানে? *</label>
+          <select class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Current_Employment_Status" required>
+            <option value="">Select status/অবস্থা নির্বাচন করুন</option>
+            <option value="Wage Employed">Wage Employed/বেতনভিত্তিক কাজে নিযুক্ত</option>
+            <option value="Self Employed">Self Employed/স্ব-নিযুক্তি কাজে নিযুক্ত</option>
+            <option value="Unemployed">Unemployed/নিযুক্ত নয়</option>
+          </select>
+        </div>
+
+        <!-- 6. Additional details for Wage Employed candidates -->
+        <h2 class="text-xl font-bold text-gray-700 border-b-2 pb-2 mb-4 mt-8">6. Additional details for Wage Employed candidates/ 'বেতনভিত্তিক নিয়োগের' সাথে জড়িত' হয়, তবেই নিম্নলিখিত প্রশ্নগুলি প্রাসঙ্গিক হবে</h2>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">26. a) What is your current monthly income bracket (In Rs.)/আপনার বর্তমানে মাসিক আয় কত (টাকায়)? *</label>
+          <select class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Current_Monthly_Income_Wage" required>
+            <option value="">Select income bracket/আয়ের পরিসর নির্বাচন করুন</option>
+            <option value="0-5000">0-5000</option>
+            <option value="5000-8000">5000-8000</option>
+            <option value="8000-10000">8000-10000</option>
+            <option value="10000-13000">10000-13000</option>
+            <option value="13000-16000">13000-16000</option>
+            <option value="16000 and above">16000 and above</option>
+          </select>
+        </div>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">27. b) How long are you employed there/যদি হ্যাঁ হয়, তবে কতোদিন সেই চাকরি করেছিলেন? *</label>
+          <select class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Employment_Duration_Wage" required>
+            <option value="">Select duration/সময়কাল নির্বাচন করুন</option>
+            <option value="0 to 3 months">0 to 3 months/মাস</option>
+            <option value="3 to 6 months">3 to 6 months/মাস</option>
+            <option value="6 to 12 months">6 to 12 months/মাস</option>
+            <option value=">12 months">>=12 months/মাস</option>
+          </select>
+        </div>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">28. c) Did you have to migrate to another state for employment/আপনাকে কি অন্য রাজ্যে স্থানান্তরিত হতে হয়েছে চাকরি করার জন্য? *</label>
+          <div class="flex items-center space-x-4">
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Migrate_State_Employment" value="Yes" required>
+              <span class="ml-2 text-gray-700">Yes/হ্যাঁ</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Migrate_State_Employment" value="No">
+              <span class="ml-2 text-gray-700">No/না</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">29. d) Did you have to migrate to another district within West Bengal for employment/আপনাকে কি পশ্চিমবঙ্গের মধ্যেই নিজের জেলা থেকে অন্য জেলায় স্থানান্তরিত হতে হয়েছে চাকরি করার জন্য? *</label>
+          <div class="flex items-center space-x-4">
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Migrate_District_Employment" value="Yes" required>
+              <span class="ml-2 text-gray-700">Yes/হ্যাঁ</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Migrate_District_Employment" value="No">
+              <span class="ml-2 text-gray-700">No/না</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">30. e) Are you working in the same job role that you were educated/ trained in/ আপনি যে কোর্স করেছেন সেই কাজই কি করছেন? *</label>
+          <div class="flex items-center space-x-4">
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Same_Job_Role_Wage" value="Yes" required>
+              <span class="ml-2 text-gray-700">Yes/হ্যাঁ</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Same_Job_Role_Wage" value="No">
+              <span class="ml-2 text-gray-700">No/না</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">31. f) Have you been offered a higher/better position in your job courtesy of your vocational education /training/আপনাকে কি আপনার পঠিত বৃত্তিমূলক কোর্সের ওপর ভিত্তি করে পদোন্নতি দেওয়া হয়েছে? (to assess the vertical mobility) *</label>
+          <div class="flex items-center space-x-4">
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Offered_Better_Position_Wage" value="Yes" required>
+              <span class="ml-2 text-gray-700">Yes/হ্যাঁ</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Offered_Better_Position_Wage" value="No">
+              <span class="ml-2 text-gray-700">No/না</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">32. g) Are you looking for International Placement/আপনি কি আন্তর্জাতিক নিয়োগের সন্ধানে আছেন? *</label>
+          <div class="flex items-center space-x-4">
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Looking_International_Placement" value="Yes" required>
+              <span class="ml-2 text-gray-700">Yes/হ্যাঁ</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Looking_International_Placement" value="No">
+              <span class="ml-2 text-gray-700">No/না</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 7. Additional details for Self Employed candidates -->
+        <h2 class="text-xl font-bold text-gray-700 border-b-2 pb-2 mb-4 mt-8">7. Additional details for Self Employed candidates/ স্বনিযুক্ত প্রার্থীদের জন্য তবে নিম্নলিখিত প্রশ্ন গুলি প্রাসঙ্গিক</h2>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">33. a) What is your current monthly income bracket (In Rs.)/আপনার বর্তমানে মাসিক আয় কত (টাকায়)? *</label>
+          <select class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Current_Monthly_Income_Self_Employed" required>
+            <option value="">Select income bracket/আয়ের পরিসর নির্বাচন করুন</option>
+            <option value="0-5000">0-5000</option>
+            <option value="5000-8000">5000-8000</option>
+            <option value="8000-10000">8000-10000</option>
+            <option value="10000-13000">10000-13000</option>
+            <option value="13000-16000">13000-16000</option>
+            <option value="16000 and above">16000 and above</option>
+          </select>
+        </div>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">34. b) Are you working in the same job role that you were educated/ trained in/ আপনি যে কোর্স করেছেন সেই কাজই কি করছেন? *</label>
+          <div class="flex items-center space-x-4">
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Same_Job_Role_Self_Employed" value="Yes" required>
+              <span class="ml-2 text-gray-700">Yes/হ্যাঁ</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Same_Job_Role_Self_Employed" value="No">
+              <span class="ml-2 text-gray-700">No/না</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">35. c) Have you received any CC (Cash-credit) Linkage/ Bank Loan/আপনি কি ক্যাশ-ক্রেডিট লিংকেজ বা ব্যাঙ্ক ঋণ পেয়েছেন? *</label>
+          <div class="flex items-center space-x-4">
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="CC_Loan_Received" value="Yes" required>
+              <span class="ml-2 text-gray-700">Yes/হ্যাঁ</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="CC_Loan_Received" value="No">
+              <span class="ml-2 text-gray-700">No/না</span>
+            </label>
+          </div>
+        </div>
+
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Scheme_Name_CC_Loan" placeholder="36. If, yes, mention the scheme name/পেলে, কোন প্রকল্প থেকে তার নাম উল্লেখ করুন *">
+
+        <!-- 8.i. Additional details for the status of unemployed candidates. -->
+        <h2 class="text-xl font-bold text-gray-700 border-b-2 pb-2 mb-4 mt-8">8.i. Additional details for the status of unemployed candidates./অনিযুক্ত প্রার্থীদের পরিস্থিতির জন্য অতিরিক্ত অথ্যসমূহ :</h2>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">37. a) If not employed, what are you currently doing/যদি আপনি অনিযুক্ত হন, তবে বর্তমানে আপনি কি করছেন? *</label>
+          <select class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Unemployed_Current_Activity" required>
+            <option value="">Select activity/কার্যক্রম নির্বাচন করুন</option>
+            <option value="Looking for a job">Looking for a job/চাকরি খুঁজছি</option>
+            <option value="Pursuing higher education">Pursuing higher education/higher level of a course/উচ্চ শিক্ষায় রত আছি</option>
+            <option value="Preparing for a Government Job">Preparing for a Government Job/সরকারী চাকরির পরীক্ষার প্রস্তুতি নিচ্ছি</option>
+            <option value="Thinking of starting own business">Thinking of starting own business/নিজের উদ্যোগ শুরু করার কথা ভাবছি</option>
+            <option value="Not Looking for a job">Not Looking for a job/চাকর খুঁজছি না</option>
+            <option value="Others">Others/অন্যান্য</option>
+          </select>
+        </div>
+
+        <!-- 8.ii. Unemployed candidates in search of job -->
+        <h2 class="text-xl font-bold text-gray-700 border-b-2 pb-2 mb-4 mt-8">8.ii. Unemployed candidates in search of job/ উপরিউল্লিখিত প্রশ্নের উত্তর যদি 'চাকরি খুঁজছি' হয়, শুধুমাত্র সেক্ষেত্রেই নিম্নলিখিত প্রশ্ন গুলি প্রাসঙ্গিক</h2>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">38. a) Are you willing to move out of your hometown but within the state of West Bengal for better opportunities/আপনি কি নিজের বাড়ির থেকে দূরে কিন্তু পশ্চিমবঙ্গের মধ্যেই ভালো চাকরির সুযোগ পেলে যেতে ইচ্ছুক? *</label>
+          <div class="flex items-center space-x-4">
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Willing_Move_Within_WB" value="Yes" required>
+              <span class="ml-2 text-gray-700">Yes/হ্যাঁ</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Willing_Move_Within_WB" value="No">
+              <span class="ml-2 text-gray-700">No/না</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">39. b) Are you willing to move out of your hometown and outside the state of West Bengal for better opportunities/আপনি কি নিজের বাড়ির থেকে দূরে এবং পশ্চিমবঙ্গের বাইরে ভালো চাকরির সুযোগ পেলে যেতে ইচ্ছুক? *</label>
+          <div class="flex items-center space-x-4">
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Willing_Move_Outside_WB" value="Yes" required>
+              <span class="ml-2 text-gray-700">Yes/হ্যাঁ</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Willing_Move_Outside_WB" value="No">
+              <span class="ml-2 text-gray-700">No/না</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Recommendation -->
+        <h2 class="text-xl font-bold text-gray-700 border-b-2 pb-2 mb-4 mt-8">Recommendation / সুপারিশ</h2>
+
+        <div class="question-group border p-4 rounded-md shadow-sm">
+          <label class="block text-gray-700 text-sm font-semibold mb-2">40. Would you recommend such a vocational education & training program to others?/আপনি কি বৃত্তিবৃ মূলক শিক্ষা ও শি নের কোর্স অর্স ন্যান্যদের কাছে সুপারিশ করবেন? *</label>
+          <div class="flex items-center space-x-4">
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Recommend_Course_To_Others" value="Yes" required>
+              <span class="ml-2 text-gray-700">Yes/হ্যাঁ</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" class="form-radio text-blue-600" name="Recommend_Course_To_Others" value="No">
+              <span class="ml-2 text-gray-700">No/না</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 10. Details of the surveyor and other important details to be captured -->
+        <h2 class="text-xl font-bold text-gray-700 border-b-2 pb-2 mb-4 mt-8">10. Details of the surveyor and other important details to be captured/তথ্য সংহকারীর বিবরণ ও অন্যান্য পূর্ন তর্ন থ্য:</h2>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Surveyor_Name" placeholder="41. Name of the Surveyor/তথ্য সংহকারীর নাম *" required>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Surveyor_Designation" placeholder="42. Designation of the Surveyor / তথ্য সংহকারীর পদ *" required>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Date_Phone_Call" type="date" placeholder="43. Date of phone call/ফোন করার তারিখ *" required>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Time_Phone_Call" type="time" placeholder="44. Time of the phone call/ফোন করার সময় *" required>
+        <input class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400" name="Duration_Phone_Call" placeholder="45. Duration of the phone call/কত ন ধরে কথা হয়েছিল *" required>
+
+        <button type="submit" class="w-full bg-blue-600 text-white font-bold p-3 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out shadow-lg transform hover:scale-105">
+          ✅ Submit Vocational Survey / বৃত্তিমূলক সমীক্ষা জমা দিন
+        </button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

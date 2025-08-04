@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Survey Index</title>
+    <!-- Link Google Fonts for Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <!-- Link your CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+    <div class="main-container">
+        <div class="card">
+            <h1>Welcome to the Survey System</h1>
+            <p>Please select a survey below to proceed.</p>
+            <div class="btn-group">
+                <a href="/survey/rpl" class="survey-btn">RPL Survey</a>
+                <a href="/survey/stt" class="survey-btn">STT Survey</a>
+                <a href="/survey/dtet" class="survey-btn">DTET Survey</a>
+                <a href="/survey/vocational" class="survey-btn">Vocational Survey</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

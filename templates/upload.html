@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Upload Page</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='upload.css') }}">
+</head>
+<body>
+<!-- UPLOAD PAGE -->
+<h2>Upload Survey Excel File for Prediction</h2>
+<form action="/predict" method="POST" enctype="multipart/form-data">
+  <label>Select Survey Type:</label>
+  <select name="survey_type">
+    <option value="rpl">RPL</option>
+    <option value="stt">STT</option>
+    <option value="dtet">DTET</option>
+    <option value="vocational">Vocational</option>
+  </select><br><br>
+  <label>Upload Excel (.xlsx) File:</label>
+  <input type="file" name="file" accept=".xlsx" required><br><br>
+  <button type="submit">Upload & Predict</button>
+</form>
+</body>
+</html>
