@@ -21,9 +21,27 @@
       border: none; border-radius: 5px; cursor: pointer;
     }
     .submit-btn:hover { background-color: #0056b3; }
+    .back-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: #e0e0e0;
+  color: #333;
+  padding: 8px 14px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+.back-button:hover {
+  background-color: #d0d0d0;
+}
+
   </style>
 </head>
 <body class="p-4 flex items-center justify-center min-h-screen">
+  <a href="{{ url_for('index') }}" class="back-button">← Back</a>
   <div class="container mx-auto p-4 md:p-8 bg-white rounded-lg shadow-xl max-w-2xl w-full">
     <div class="form-card">
       <h1 class="text-3xl font-extrabold text-gray-800 mb-6 text-center">📘 Short-Term Training (STT) – Trainee Survey / স্বল্প মেয়াদি প্রশিক্ষণ – প্রশিক্ষণপ্রাপ্তদের প্রশ্নসূচী</h1>
