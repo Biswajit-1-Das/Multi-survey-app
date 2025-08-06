@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="{{ url_for('static', filename='rpl.css') }}">
-  <title>DTET Survey Form</title>
+  <title>{{ survey_type.upper() }} Survey Form</title>
+
   <style>
     body { font-family: Arial, sans-serif; padding: 20px; background: #f8f9fa; }
     h2, h3 { color: #003366; }
