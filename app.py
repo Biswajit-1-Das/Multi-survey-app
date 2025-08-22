@@ -5,6 +5,11 @@ import csv
 app = Flask(__name__)
 SURVEYS = ['rpl', 'stt', 'dtet', 'vocational']
 
+# Get connection string from environment variable
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+
+db = SQLAlchemy(app)
+
 @app.route('/')
 def index():
     return render_template('index.html')
