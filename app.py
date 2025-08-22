@@ -27,12 +27,26 @@ def submit_form(survey_type):
     os.makedirs('survey_data', exist_ok=True)
     file_exists = os.path.isfile(csv_filename)
 
+    # If file exists, read the headers
+    if file_exists:
+        with open(csv_filename, newline='', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            fieldnames = reader.fieldnames
+    else:
+        fieldnames = list(data.keys())
+
+    # Ensure all fields are present (avoid ValueError)
+    for key in data.keys():
+        if key not in fieldnames:
+            fieldnames.append(key)
+
+    # Write the row
     with open(csv_filename, mode='a', newline='', encoding='utf-8') as f:
-        writer = csv.DictWriter(f, fieldnames=data.keys())
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
 
         if not file_exists:
-            writer.writeheader()  # Write column names
-        writer.writerow(data)    # Write response
+            writer.writeheader()
+        writer.writerow(data)
 
     return render_template("thank_you.html", survey=survey_type.upper())
 
